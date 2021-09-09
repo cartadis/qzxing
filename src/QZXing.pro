@@ -22,7 +22,7 @@ CONFIG += \
           enable_decoder_pdf17 \
           enable_encoder_qr_code \
           #staticlib \
-          #qzxing_qml \
+          qzxing_qml \
           #qzxing_multimedia \
 
 VERSION = 3.2
@@ -33,3 +33,11 @@ TEMPLATE = lib
 include(QZXing-components.pri)
 
 DEFINES -= DISABLE_LIBRARY_FEATURES
+
+DESTDIR = $$[QT_SYSROOT]/usr/lib
+
+# Default rules for deployment.
+unix {
+    target.path = /usr/lib
+}
+!isEmpty(target.path): INSTALLS += target
