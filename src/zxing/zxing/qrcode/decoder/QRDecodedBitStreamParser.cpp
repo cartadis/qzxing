@@ -64,6 +64,7 @@ void DecodedBitStreamParser::append(std::string &result,
                                     const zxing::byte *bufIn,
                                     size_t nIn,
                                     const char *src) {
+
 #ifndef NO_ICONV
     if (nIn == 0) {
         return;

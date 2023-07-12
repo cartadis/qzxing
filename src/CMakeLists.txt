@@ -63,6 +63,10 @@ if(ANDROID)
     add_definitions(-DNO_ICONV)
 endif()
 
+if(APPLE)
+    add_definitions(-DNO_ICONV)
+endif()
+
 if(VS_WINRT_COMPONENT)
     add_definitions(-DNO_ICONV)
 endif(VS_WINRT_COMPONENT)
