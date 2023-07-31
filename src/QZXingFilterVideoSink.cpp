@@ -7,6 +7,7 @@ QZXingFilter::QZXingFilter(QObject *parent)
     : QObject(parent)
     , decoder(QZXing::DecoderFormat_QR_CODE)
     , decoding(false)
+    , m_videoSink(nullptr)
 {
     /// Connecting signals to handlers that will send signals to QML
     connect(&decoder, &QZXing::decodingStarted,
@@ -52,13 +53,22 @@ int QZXingFilter::orientation() const
     return orientation_;
 }
 
-void QZXingFilter::setVideoSink(QObject *videoSink){
+void QZXingFilter::setVideoSink(QObject *videoSink)
+{
+    if (m_videoSink == videoSink)
+        return;
+    if (m_videoSink)
+        disconnect(m_videoSink, &QVideoSink::videoFrameChanged, this, &QZXingFilter::processFrame);
     m_videoSink = qobject_cast<QVideoSink*>(videoSink);
-
     connect(m_videoSink, &QVideoSink::videoFrameChanged, this, &QZXingFilter::processFrame);
 }
 
-void QZXingFilter::processFrame(const QVideoFrame &frame) {
+void QZXingFilter::processFrame(const QVideoFrame &frame)
+{
+    if (!m_videoSink)
+        return;
+    if (decoder.getEnabledFormats() == QZXing::DecoderFormat_None)
+        return;
 #if defined(Q_OS_ANDROID) && QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
     m_videoSink->setRhi(nullptr); // https://bugreports.qt.io/browse/QTBUG-97789
     QVideoFrame f(frame);
