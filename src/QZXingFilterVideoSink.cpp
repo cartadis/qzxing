@@ -60,7 +60,8 @@ void QZXingFilter::setVideoSink(QObject *videoSink)
     if (m_videoSink)
         disconnect(m_videoSink, &QVideoSink::videoFrameChanged, this, &QZXingFilter::processFrame);
     m_videoSink = qobject_cast<QVideoSink*>(videoSink);
-    connect(m_videoSink, &QVideoSink::videoFrameChanged, this, &QZXingFilter::processFrame);
+    if (videoSink)
+        connect(m_videoSink, &QVideoSink::videoFrameChanged, this, &QZXingFilter::processFrame, Qt::QueuedConnection);
 }
 
 void QZXingFilter::processFrame(const QVideoFrame &frame)
