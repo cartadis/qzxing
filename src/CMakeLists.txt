@@ -48,7 +48,7 @@ if(QZXING_USE_ENCODER)
     add_definitions(-DENABLE_ENCODER_GENERIC -DENABLE_ENCODER_QR_CODE)
 endif(QZXING_USE_ENCODER)
 
-add_library(qzxing "" ${SOURCES})
+add_library(qzxing SHARED "" ${SOURCES})
 
 if(WIN32)
     add_subdirectory(zxing/win32)
@@ -120,7 +120,7 @@ endif()
 
 
 # Change Global Definitions depending on how you want to use the library
-target_compile_definitions(qzxing PUBLIC DISABLE_LIBRARY_FEATURES)
+target_compile_definitions(qzxing PUBLIC QZXING_LIB)
 
 # Target includes
 target_include_directories(qzxing
@@ -134,3 +134,8 @@ target_include_directories(qzxing
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 )
 
+install(TARGETS qzxing
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
