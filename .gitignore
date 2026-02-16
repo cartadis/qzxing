@@ -1,28 +1,63 @@
-moc/
-obj/
-rcc/
-tmp/
-ui/
-.make.cache
-*.BAT
-*.inf
-Makefile
-*.mk
-*.loc
-*.user
-*.mmp
-*.pkg
-QZXing-build-*
-build-*
-*.Debug
-*.Release
-debug/
-*.pdb
-*.sdf
+# ----------------------------------------------------------------------------
+# Temporary, backup and editor files
+*~
+*.autosave
+*.core
+*.o
+*.obj
+*.orig
+*.rej
+*.moc
+*_pch.h.cpp
+*.qm
+.#*
+*.*#
+tags
+.DS_Store
+.directory
+Thumbs.db
+.*.swp
+*.flc
+
+# ----------------------------------------------------------------------------
+# Qt / QtCreator
+*.pro.user*
+CMakeLists.txt.user*
+moc_*.cpp
+moc_predefs.h
+ui_*.h
+qrc_*.cpp
+.qmake.cache
+.qmake.stash
+
+# ----------------------------------------------------------------------------
+# Build folders (anywhere)
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile*
+
+# ----------------------------------------------------------------------------
+# Generated binaries / libraries
+*.a
+*.so
+*.so.*
+*.dll
+*.exe
+
+# ----------------------------------------------------------------------------
+# Version control ignores for IDEs
 *.sln
 *.suo
 *.vcxproj*
-.gradle
-.idea
-.build
-.obj
+*.idb
+*.ncb
+*.sdf
+*.opensdf
+
+# ----------------------------------------------------------------------------
+# Misc
+*.res
+*.rc
+*.debug
